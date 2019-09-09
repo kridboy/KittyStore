@@ -9,5 +9,8 @@
         <module name="datalayer" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="datalayer" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -43,6 +43,21 @@ public class BreedDAO implements DataAccessInterface<Breed> {
             handler.prepareStatement(SELECT_BREED_BY_ID);
             handler.setParameter(id);
             handler.executeQuery();
+            results.next();
+            results = handler.getResults();
+
+            return new Breed(results.getInt(1), results.getString(2), results.getBigDecimal(3));
+        } catch (SQLException sqle) {
+            throw new RuntimeException(sqle);
+        }
+    }
+
+    public Breed getByName(String name) {
+        try (JdbcHandler handler = JdbcHandler.getInstance()) {
+            handler.prepareStatement(SELECT_BREED_BY_NAME);
+            handler.setParameter(name);
+            handler.executeQuery();
+            results.next();
             results = handler.getResults();
 
             return new Breed(results.getInt(1), results.getString(2), results.getBigDecimal(3));

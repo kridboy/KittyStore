@@ -44,6 +44,7 @@ public class ItemDAO implements DataAccessInterface<Item> {
             handler.prepareStatement(SELECT_ITEM_BY_ID);
             handler.setParameter(id);
             handler.executeQuery();
+            results.next();
             results = handler.getResults();
 
             return new Item(results.getInt(1), results.getInt(2), results.getInt(3), results.getInt(4));

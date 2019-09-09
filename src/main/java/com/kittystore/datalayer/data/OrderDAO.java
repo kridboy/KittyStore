@@ -37,6 +37,7 @@ public class OrderDAO implements DataAccessInterface<Order>{
             handler.prepareStatement(SELECT_ORDER_BY_ID);
             handler.setParameter(id);
             handler.executeQuery();
+            results.next();
             results = handler.getResults();
 
             return new Order(results.getInt(1),results.getTimestamp(2));

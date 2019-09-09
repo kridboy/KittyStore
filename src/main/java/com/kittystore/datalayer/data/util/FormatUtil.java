@@ -24,6 +24,6 @@ public class FormatUtil {
     public static final String SELECT_ITEM_BY_ID = "SELECT * FROM Items WHERE ID=?";
     public static final String SELECT_ORDER_BY_ID = "SELECT * FROM Orders WHERE ID=?";
     public static final String SELECT_BREED_BY_NAME = "SELECT * FROM Breeds WHERE Name=?";
-    public static final String SELECT_BREEDER_BY_NAME = "SELECT * FROM Breeders WHERE Name=?";
+    public static final String SELECT_BREEDER_BY_NAME = "SELECT * FROM Breeders WHERE Breeder_Name=?";
 
 }

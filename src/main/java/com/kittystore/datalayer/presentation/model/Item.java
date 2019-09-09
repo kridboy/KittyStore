@@ -24,6 +24,14 @@ public class Item {
         this.count = count;
     }
 
+    public Item(Item item) {
+        this.id = item.getId();
+        this.orderID = item.getOrderID();
+        this.breederID = item.getBreederID();
+        this.breedID = item.getBreedID();
+        this.count = item.getCount();
+    }
+
     public int getId() {
         return id;
     }

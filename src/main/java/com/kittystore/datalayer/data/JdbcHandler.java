@@ -12,33 +12,37 @@ import java.sql.*;
 public class JdbcHandler implements Closeable, AutoCloseable {
     private static JdbcHandler instance;
     private static final Logger logger = LogManager.getLogger(JdbcHandler.class);
-    private Connection con;
+    private static Connection con;
     private Statement statement;
     private PreparedStatement preparedStatement;
     private ResultSet results;
-    private int parameterCount = 1;
+    private static int parameterCount = 1;
     private boolean isTransaction = false;
 
     private JdbcHandler() {
-        con = getConnection();
     }
 
     public static JdbcHandler getInstance() {
         instance = instance == null ? new JdbcHandler() : instance;
+        con = getConnection();
+        parameterCount = 1;
         return instance;
     }
 
-    private Connection getConnection() {
-        if (con != null) return con;
-        try {
-            con = DriverManager.getConnection(
-                    "jdbc:mariadb://noelvaes.eu/javaeewondelgemDB12",
-                    "javaeewondelgem",
-                    "java€€wond€lg€m2019"
-            );
+    private static Connection getConnection() {
+        try{
+            if (con == null||con.isClosed()) {
+
+                con = DriverManager.getConnection(
+                        "jdbc:mariadb://noelvaes.eu/javaeewondelgemDB12",
+                        "javaeewondelgem",
+                        "java€€wond€lg€m2019"
+                );
+            }
         } catch (SQLException sqle) {
             throw new RuntimeException(sqle);
         }
+
         return con;
     }
 
@@ -119,6 +123,7 @@ public class JdbcHandler implements Closeable, AutoCloseable {
     void executeUpdate() {
         try {
             preparedStatement.executeUpdate();
+            parameterCount = 1;
         } catch (SQLException sqle) {
             throw new RuntimeException(sqle);
         }
@@ -127,6 +132,7 @@ public class JdbcHandler implements Closeable, AutoCloseable {
     void executeQuery() {
         try {
             setResults(preparedStatement.executeQuery());
+            parameterCount = 1;
         } catch (SQLException sqle) {
             throw new RuntimeException(sqle);
         }

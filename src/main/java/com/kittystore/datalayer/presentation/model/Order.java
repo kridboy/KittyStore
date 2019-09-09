@@ -19,6 +19,12 @@ public class Order {
         this.purchaseTime = purchaseTime;
     }
 
+    public Order(Order order) {
+        this.id = order.getId();
+        this.customerID = order.getCustomerID();
+        this.purchaseTime = order.getPurchaseTime();
+    }
+
     public int getId() {
         return id;
     }

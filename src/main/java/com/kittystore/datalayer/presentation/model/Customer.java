@@ -24,6 +24,15 @@ public class Customer {
         this.email = email;
     }
 
+    public Customer(Customer customer) {
+        this.id = customer.getId();
+        this.firstName = customer.getFirstName();
+        this.lastName = customer.getLastName();
+        this.address = customer.getAddress();
+        this.email = customer.getEmail();
+    }
+
+
     public int getId() {
         return id;
     }

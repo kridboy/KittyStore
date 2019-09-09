@@ -37,6 +37,7 @@ public class CustomerDAO implements DataAccessInterface<Customer> {
             handler.prepareStatement(SELECT_CUSTOMER_BY_ID);
             handler.setParameter(id);
             handler.executeQuery();
+            results.next();
             results = handler.getResults();
 
             return new Customer(results.getString(1), results.getString(2), results.getString(3), results.getString(4));

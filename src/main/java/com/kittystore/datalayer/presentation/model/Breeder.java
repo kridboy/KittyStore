@@ -21,6 +21,13 @@ public class Breeder {
         this.phoneNumber = phoneNumber;
     }
 
+    public Breeder(Breeder breeder) {
+        this.id = breeder.getID();
+        this.name = breeder.getName();
+        this.contact = breeder.getContact();
+        this.phoneNumber = breeder.getPhoneNumber();
+    }
+
     public int getID() {
         return id;
     }

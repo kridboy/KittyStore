@@ -37,6 +37,11 @@ public class BreederDAO implements DataAccessInterface<Breeder> {
     public void update(Breeder breeder) {
         try (JdbcHandler handler = JdbcHandler.getInstance()) {
             handler.prepareStatement(UPDATE_BREEDER);
+            handler.setParameter(breeder.getName());
+            handler.setParameter(breeder.getContact());
+            handler.setParameter(breeder.getPhoneNumber());
+            handler.setParameter(breeder.getID());
+            handler.executeUpdate();
             setParameters(handler, breeder);
         }
     }
@@ -48,8 +53,21 @@ public class BreederDAO implements DataAccessInterface<Breeder> {
             handler.setParameter(id);
             handler.executeQuery();
             results = handler.getResults();
+            results.next();
+            return new Breeder(results.getInt(1), results.getString(2), results.getString(3),results.getString(4));
+        } catch (SQLException sqle) {
+            throw new RuntimeException(sqle);
+        }
+    }
 
-            return new Breeder(results.getString(1), results.getString(2), results.getString(3));
+    public Breeder getByName(String name){
+        try (JdbcHandler handler = JdbcHandler.getInstance()) {
+            handler.prepareStatement(SELECT_BREEDER_BY_NAME);
+            handler.setParameter(name);
+            handler.executeQuery();
+            results = handler.getResults();
+            results.next();
+            return new Breeder(results.getInt(1), results.getString(2), results.getString(3),results.getString(4));
         } catch (SQLException sqle) {
             throw new RuntimeException(sqle);
         }

@@ -19,6 +19,12 @@ public class Breed {
         this.price = price;
     }
 
+    public Breed(Breed breed) {
+        this.id = breed.getID();
+        this.name = breed.getName();
+        this.price = breed.getPrice();
+    }
+
     public int getID() {
         return id;
     }
